@@ -1,0 +1,4 @@
+- Mentored young developers in JavaScript, C#, Lua, and Python; delivering structured instruction on core programming concepts, advanced techniques, and game-development fundamentals.
+- Supported students through debugging, problem-solving, and iterative project work, strengthening their understanding while simultaneously sharpening personal debugging discipline.
+- Demonstrated intermediate and advanced concepts in real time (loops, OOP, state management, logic design), promoting both conceptual learning and hands-on proficiency.
+- Fostered an environment of curiosity and self-driven learning while monitoring progress to ensure mastery of key milestones.

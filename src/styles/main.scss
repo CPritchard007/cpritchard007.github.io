@@ -1,0 +1,43 @@
+@use './tokens.scss' as *;
+
+// MDI font for Vuetify icon set
+@import '@mdi/font/css/materialdesignicons.css';
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--v-theme-background));
+  color: rgb(var(--v-theme-on-background));
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  color: rgb(var(--v-theme-primary));
+}
+
+.page {
+  padding-top: 32px;
+  padding-bottom: 56px;
+}
+
+.section-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.lead {
+  opacity: 0.78;
+  max-width: 70ch;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
