@@ -27,6 +27,12 @@ Do this once in GitHub:
 - Under **Build and deployment**, set **Source** to **Deploy from a branch**
 - Select **Branch**: `gh-pages` and **Folder**: `/ (root)`
 
+### Company logos (build assets)
+
+If you reference images using string paths like `src/assets/company_logos/...`, they won’t be bundled automatically.
+
+This repo copies `src/assets/company_logos/` into `dist/src/assets/company_logos/` during deploy (see `scripts/prepare-pages.mjs`).
+
 ### Customize
 
 - **Name / links**: `src/App.vue`
