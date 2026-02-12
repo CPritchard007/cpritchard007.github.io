@@ -19,12 +19,13 @@ npm run preview
 ### Deploy to GitHub Pages
 
 - **GitHub Actions** is set up in `.github/workflows/deploy.yml`
-- It deploys on every push to the **`main`** branch
+- It deploys on every push to the **`main`** branch by publishing the build output to the **`gh-pages`** branch
 
 Do this once in GitHub:
 
 - Go to your repo → **Settings** → **Pages**
-- Under **Build and deployment**, set **Source** to **GitHub Actions**
+- Under **Build and deployment**, set **Source** to **Deploy from a branch**
+- Select **Branch**: `gh-pages` and **Folder**: `/ (root)`
 
 ### Customize
 
