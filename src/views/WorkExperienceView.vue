@@ -6,7 +6,6 @@ import taplaneDescription from '../data/taplane.md?raw'
 import gambitVenturesDescription from '../data/gambit-ventures.md?raw'
 import codeninjaDescription from '../data/codeninja.md?raw'
 
-// Kept as `src/...` paths (copied into `dist/` by `scripts/prepare-pages.mjs`).
 const taplaneIcon = 'src/assets/company_logos/taplane.jpeg'
 const codeninjaIcon = 'src/assets/company_logos/codeninjas.png'
 
