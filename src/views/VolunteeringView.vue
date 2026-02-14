@@ -12,6 +12,7 @@ const volunteering = [
             {
                 id: 1,
                 name: '4838 - River Rouge',
+                dates: '2022 - 2024',
                 image: robotics_4838,
                 description: firstrobotics_4838,
                 actions: [
@@ -24,6 +25,7 @@ const volunteering = [
             },
             {
                 id: 2,
+                dates: '2017 - 2019',
                 name: '4936 - Viral Vortex',
                 description: firstrobotics_4936,
             },
@@ -43,7 +45,8 @@ const volunteering = [
                     <v-card class="h-100">
                         <v-img v-if="child.image" :src="child.image" width="100%"  max-height="180px" cover />
                         <div v-else class="no-image"></div>
-                        <v-card-title class="text-center"><h2>{{child.name}}</h2></v-card-title>
+                        <v-card-title class="text-center">{{child.name}}</v-card-title>
+                        <v-card-subtitle class="text-secondary font-weight-bold">{{ child.dates }}</v-card-subtitle>
                         <v-card-text class="markdown" v-html="renderMarkdown(child.description)"></v-card-text>
                         <v-card-actions class="px-4 pb-4">
                             <v-btn v-for="action in child.actions" :key="action.text" variant="tonal" :prepend-icon="action.icon" :href="action.href" target="_blank" rel="noreferrer">

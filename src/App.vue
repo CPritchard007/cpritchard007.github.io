@@ -18,6 +18,12 @@ const items = [
   // { title: 'Contact', to: { name: 'contact' }, icon: 'mdi-email-outline' },
 ]
 
+const socialLinks = [
+  { title: 'LinkedIn', click: () => window.open('https://www.linkedin.com/in/curtis-pritchard/', '_blank'), icon: 'mdi-linkedin' },
+  { title: 'Phone', click: () => window.open('tel:5199034121'), icon: 'mdi-phone' },
+  { title: 'Email', click: () => window.open('mailto:cpritchard649@gmail.com'), icon: 'mdi-email' },
+]
+
 const activeTitle = computed(() => items.find((i) => i.to?.name === route.name)?.title ?? 'Portfolio')
 
 const theme = useTheme()
@@ -70,8 +76,24 @@ function goHome() {
 
     <v-main>
       <router-view />
+      
     </v-main>
 
+  <v-fab
+    color="primary"
+    location="bottom right"
+    app
+    size="large"
+    class="fab-social"
+    icon
+  >
+  <v-icon class="mdi mdi-chat-outline" ></v-icon>
+  <v-speed-dial location="top center" transition="slide-y-transition" activator="parent">
+          <v-btn v-for="link in socialLinks" :key="link.title" icon @click="link.click">
+            <v-icon :class="['mdi', link.icon]" size="24"></v-icon>
+          </v-btn>
+        </v-speed-dial>
+</v-fab>
   </v-app>
 </template>
 
