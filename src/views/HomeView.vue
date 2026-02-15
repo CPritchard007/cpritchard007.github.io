@@ -48,18 +48,6 @@ const yearsOfExperience = new Date().getFullYear() - 2021
         </v-card>
       </v-col>
     </v-row>
-
-    <v-card class="hero-card mt-6" rounded="md" elevation="0">
-    <v-card-title class="text-primary">Adapting to the AI Era</v-card-title>
-    <v-card-text class="">
-      <p>
-        Artificial intelligence is reshaping the landscape of software development, setting new expectations for developers everywhere. This evolution cannot be ignored—we must embrace and adapt to the opportunities and challenges it brings.      
-      </p>
-      <p class="mt-2">
-      I believe developers have a duty to leverage AI tools responsibly to boost productivity and enhance the quality of their work, while continuously sharpening their own problem-solving skills and expertise.
-      </p>
-    </v-card-text>
-    </v-card>
   </v-container>
 </template>
 
