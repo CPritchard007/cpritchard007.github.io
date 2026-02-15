@@ -13,16 +13,13 @@ function viewCompanyProjects() {
 <template>
   <v-container class="page">
     <div class="d-flex align-center justify-space-between flex-wrap ga-3 mb-6">
-      <div>
-        <h1 class="section-title">Personal Projects</h1>
-      </div>
+    <div class="kicker">Projects</div>    
       <v-btn variant="tonal" prepend-icon="mdi-github" href="https://github.com/cpritchard007" target="_blank"
         rel="noreferrer">
         GitHub
       </v-btn>
     </div>
 
-    <v-divider class="mb-6" />
 
     <div v-if="projects.length === 0">
       <p class=" text-center">No personal projects listed yet, but more are on the way!
