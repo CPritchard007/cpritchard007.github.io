@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTheme } from 'vuetify'
+import { onMounted } from 'vue'
 
 const drawer = ref(false)
 
@@ -35,6 +36,17 @@ function toggleTheme() {
 function goHome() {
   router.push({ name: 'home' })
 }
+
+onMounted(() => {
+  console.log(`%cThank you for visiting my portfolio, I hope you enjoy your stay.`, 'color: #4b4ae6; font-weight: semibold; font-size: 1.2em;')
+  console.log(`
+It has truly been an incredible journey so far, and I’m sincerely grateful to everyone who has supported me along the way.
+I look forward to continuing my work in the software development industry, helping others grow, and becoming the best versions of themselves.
+
+You will find that I have placed many different easter eggs throughout the portfolio, it serves as a small insentive to looking through my project. If you have any critiques or just want to say hello, feel free to reach out to me.
+  `)
+  console.log(`%c+1 (519) 903-4121\ncpritchard649@gmail.com`, 'color: #4b4ae6; font-weight: semibold; font-size: 1.2em;')
+})
 </script>
 
 <template>
