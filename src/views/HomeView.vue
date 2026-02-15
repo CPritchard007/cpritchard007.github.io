@@ -1,7 +1,8 @@
 <script setup>
 import TagChip from '../components/TagChip.vue'
+import { useDisplay } from 'vuetify'
 const yearsOfExperience = new Date().getFullYear() - 2021 
-
+const { mdAndUp } = useDisplay()
 
 </script>
 
@@ -28,7 +29,7 @@ const yearsOfExperience = new Date().getFullYear() - 2021
           <TagChip text="PHP" />
         </div>
       </v-col>
-      <v-col  cols="12" md="6">
+      <v-col v-if="mdAndUp" cols="12" md="6">
         <v-card class="pa-3" outlined>
           <v-card-text class="overflow-x-auto">
             <v-code type="language-typescript">
