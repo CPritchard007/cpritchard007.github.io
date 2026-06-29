@@ -17,7 +17,7 @@ const items = [
   { title: 'Resume', to: { name: 'resume' }, icon: 'mdi-file-outline' },
   // { title: 'About', to: { name: 'about' }, icon: 'mdi-account-circle-outline' },
   { title: 'Contact', to: { name: 'contact' }, icon: 'mdi-email-outline' },
-  { title: 'GitHub', to: { name: 'github' }, icon: 'mdi-github' },
+  { title: 'GitHub', href: 'https://github.com/cpritchard007', target: '_blank', icon: 'mdi-github' },
 ]
 
 const socialLinks = [
@@ -54,7 +54,16 @@ onMounted(() => {
       <v-spacer />
 
       <div class="d-none d-sm-flex ga-1">
-        <v-btn v-for="item in items" :key="item.title" variant="text" :to="item.to" :prepend-icon="item.icon">
+        <v-btn
+          v-for="item in items"
+          :key="item.title"
+          variant="text"
+          :to="item.to"
+          :href="item.href"
+          :target="item.target"
+          :rel="item.href ? 'noreferrer' : undefined"
+          :prepend-icon="item.icon"
+        >
           {{ item.title }}
         </v-btn>
       </div>
@@ -76,7 +85,15 @@ onMounted(() => {
       <v-list density="comfortable" nav>
         <v-list-item :title="activeTitle" subtitle="Navigation" />
         <v-divider class="my-2" />
-        <v-list-item v-for="item in items" :key="item.title" :to="item.to" :prepend-icon="item.icon">
+        <v-list-item
+          v-for="item in items"
+          :key="item.title"
+          :to="item.to"
+          :href="item.href"
+          :target="item.target"
+          :rel="item.href ? 'noreferrer' : undefined"
+          :prepend-icon="item.icon"
+        >
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
