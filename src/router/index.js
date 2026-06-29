@@ -13,7 +13,26 @@ const router = createRouter({
   routes: [
     { path: '/', name: 'home', component: HomeView },
     { path: '/projects', name: 'projects', component: ProjectsView },
-    { path: '/resume', name: 'resume', component: ResumeView },
+    {
+      path: '/resume',
+      name: 'resume',
+      component: ResumeView,
+      props: {
+        title: 'Resume',
+        description: 'Review my resume in-app, then open or download the PDF if you want the original file.',
+      },
+    },
+    {
+      path: '/pdf-viewer',
+      name: 'pdf-viewer',
+      component: ResumeView,
+      props: (route) => ({
+        documentName: typeof route.query.file === 'string' ? route.query.file : 'resume.pdf',
+        title: typeof route.query.title === 'string' ? route.query.title : 'PDF Viewer',
+        description:
+          'A reusable viewer route for local PDFs in the public directory, styled to behave like the rest of the site.',
+      }),
+    },
     { path: '/work-experience', name: 'work-experience', component: WorkExperienceView },
     { path: '/volunteering', name: 'volunteering', component: VolunteeringView },
     { path: '/about', name: 'about', component: AboutView },
@@ -25,4 +44,3 @@ const router = createRouter({
 })
 
 export default router
-

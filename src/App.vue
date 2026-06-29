@@ -14,7 +14,7 @@ const items = [
   { title: 'Projects', to: { name: 'projects' }, icon: 'mdi-briefcase-outline' },
   { title: 'Work Experience', to: { name: 'work-experience' }, icon: 'mdi-account-group-outline' },
   { title: 'Volunteering', to: { name: 'volunteering' }, icon: 'mdi-account-hard-hat-outline' },
-  // { title: 'Resume', to: { name: 'resume' }, icon: 'mdi-file-outline' },
+  { title: 'Resume', to: { name: 'resume' }, icon: 'mdi-file-outline' },
   // { title: 'About', to: { name: 'about' }, icon: 'mdi-account-circle-outline' },
   { title: 'Contact', to: { name: 'contact' }, icon: 'mdi-email-outline' },
 ]
