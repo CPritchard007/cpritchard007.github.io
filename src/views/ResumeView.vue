@@ -1,5 +1,6 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
+import { useDisplay } from 'vuetify'
 import defaultResumePdf from '../assets/documents/curtis-pritchard-resume-2026.pdf'
 
 const props = defineProps({
@@ -24,6 +25,7 @@ const props = defineProps({
 const page = ref(1)
 const zoom = ref(110)
 const fileStatus = ref('loading')
+const { mdAndDown } = useDisplay()
 
 const normalizedDocumentName = computed(() => props.documentName.replace(/^\/+/, ''))
 const baseUrl = new URL(import.meta.env.BASE_URL, window.location.origin)
@@ -139,7 +141,7 @@ watch(page, (value) => {
     </div>
 
     <v-card class="viewer-card" rounded="xl" elevation="0">
-      <v-card-text class="toolbar">
+      <v-card-text v-if="!mdAndDown" class="toolbar">
         <div class="toolbar-group">
           <v-btn icon="mdi-minus" variant="text" :disabled="zoom <= 50" @click="zoomOut" />
           <v-chip variant="tonal" size="small">{{ zoomLabel }}</v-chip>
@@ -178,6 +180,12 @@ watch(page, (value) => {
           The configured document could not be loaded. Add <code>public/{{ normalizedDocumentName }}</code> or open this route with a different file via
           <code>/#/pdf-viewer?file=your-document.pdf</code>.
         </p>
+      </div>
+
+      <div v-else-if="mdAndDown" class="viewer-state">
+        <v-icon icon="mdi-monitor-off" size="40" color="primary" />
+        <h2 class="text-h6 mb-2">This preview is desktop only</h2>
+        <p class="lead mb-0">On mobile and tablet, use the buttons above to open or download the PDF.</p>
       </div>
 
       <div v-else class="viewer-shell">

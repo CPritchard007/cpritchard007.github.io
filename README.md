@@ -38,7 +38,9 @@ Company logo images are imported in Vue files, so Vite bundles them into `dist/a
 ### Customize
 
 - **Name / links**: `src/App.vue`
-- **Projects list**: `src/data/projects.js`
+- **Featured projects list**: `src/data/projects.js`
+- **GitHub repo feed username**: set `VITE_GITHUB_USERNAME` (defaults to `cpritchard007`)
+- **GitHub repo topic filter**: set `VITE_GITHUB_PROJECT_TOPIC` (defaults to `project`)
 - **Pages**: `src/views/*`
 - **Theme colors**: `src/plugins/vuetify.js`
 

@@ -5,6 +5,7 @@ import { getWikipediaPageUrl, getWikipediaSearchUrl, getWikipediaSummary } from 
 const props = defineProps({
   text: { type: String, required: true },
   size: { type: String, default: 'small' },
+  wikiEnabled: { type: Boolean, default: true },
 })
 
 const open = ref(false)
@@ -16,6 +17,7 @@ const href = computed(() => {
 })
 
 function openWikipedia() {
+  if (!props.wikiEnabled) return
   const direct = getWikipediaPageUrl(props.text)
   const search = getWikipediaSearchUrl(props.text)
   const url = summary.value?.url || direct || search
@@ -23,7 +25,7 @@ function openWikipedia() {
 }
 
 async function ensureSummary() {
-  if (loading.value || summary.value) return
+  if (!props.wikiEnabled || loading.value || summary.value) return
   loading.value = true
   summary.value = await getWikipediaSummary(props.text)
   loading.value = false
@@ -38,6 +40,7 @@ watch(
 )
 
 const tooltipText = computed(() => {
+  if (!props.wikiEnabled) return ''
   if (loading.value) return 'Loading Wikipedia…'
   if (summary.value?.extract) return summary.value.extract
   return 'Click to open Wikipedia search'
@@ -45,7 +48,16 @@ const tooltipText = computed(() => {
 </script>
 
 <template>
-  <v-tooltip v-model="open" location="top" max-width="420" content-class="tag-tooltip-shell">
+  <v-chip
+    v-if="!wikiEnabled"
+    :size="size"
+    label
+    class="tag-chip tag-chip-static"
+  >
+    {{ text }}
+  </v-chip>
+
+  <v-tooltip v-else v-model="open" location="top" max-width="420" content-class="tag-tooltip-shell">
     <template #activator="{ props: actProps }">
       <v-chip v-bind="actProps" :size="size" label class="tag-chip" :title="`Open Wikipedia: ${text}`"
         @click.stop="openWikipedia" @keydown.enter.stop.prevent="openWikipedia"
@@ -77,6 +89,10 @@ const tooltipText = computed(() => {
 <style scoped>
 .tag-chip {
   cursor: pointer;
+}
+
+.tag-chip-static {
+  cursor: default;
 }
 
 :deep(.tag-tooltip-shell) {

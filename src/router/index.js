@@ -8,10 +8,20 @@ import ResumeView from '../views/ResumeView.vue'
 import WorkExperienceView from '../views/WorkExperienceView.vue'
 import VolunteeringView from '../views/VolunteeringView.vue'
 
+const githubProfileUrl = 'https://github.com/cpritchard007'
+
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/', name: 'home', component: HomeView },
+    {
+      path: '/github',
+      name: 'github',
+      beforeEnter() {
+        window.location.assign(githubProfileUrl)
+        return false
+      },
+    },
     { path: '/projects', name: 'projects', component: ProjectsView },
     {
       path: '/resume',

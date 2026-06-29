@@ -17,6 +17,7 @@ const items = [
   { title: 'Resume', to: { name: 'resume' }, icon: 'mdi-file-outline' },
   // { title: 'About', to: { name: 'about' }, icon: 'mdi-account-circle-outline' },
   { title: 'Contact', to: { name: 'contact' }, icon: 'mdi-email-outline' },
+  { title: 'GitHub', to: { name: 'github' }, icon: 'mdi-github' },
 ]
 
 const socialLinks = [
