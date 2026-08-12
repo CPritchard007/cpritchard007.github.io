@@ -57,6 +57,68 @@ function getGithubPagesUrl(repo) {
   return `https://${owner}.github.io/${repo.name}/`
 }
 
+function extractMetaImage(html) {
+  const tags = html.match(/<meta\b[^>]*>/gi) ?? []
+
+  const parsed = tags.map((tag) => {
+    const attrs = {}
+
+    for (const match of tag.matchAll(/([a-zA-Z:_-]+)\s*=\s*["']([^"']*)["']/g)) {
+      attrs[match[1].toLowerCase()] = match[2]
+    }
+
+    return attrs
+  })
+
+  const ogImage = parsed.find((attrs) => attrs.property === 'og:image' && attrs.content)
+  const twitterImage = parsed.find((attrs) => attrs.name === 'twitter:image' && attrs.content)
+
+  return ogImage?.content?.trim() || twitterImage?.content?.trim() || ''
+}
+
+function resolvePagesImageUrl(image, pagesUrl) {
+  if (!image || !pagesUrl) return ''
+
+  const normalized = image.replace('%BASE_URL%', '')
+  const base = pagesUrl.endsWith('/') ? pagesUrl : `${pagesUrl}/`
+
+  try {
+    return new URL(normalized, base).href
+  } catch {
+    return ''
+  }
+}
+
+async function getGithubPagesImage(fullName, pagesUrl) {
+  const contentPaths = ['index.html', 'docs/index.html']
+
+  for (const path of contentPaths) {
+    try {
+      const response = await fetch(`https://api.github.com/repos/${fullName}/contents/${path}`, {
+        headers: {
+          Accept: 'application/vnd.github.raw+json',
+        },
+      })
+
+      if (!response.ok) continue
+
+      const html = await response.text()
+      const image = extractMetaImage(html)
+      const resolved = resolvePagesImageUrl(image, pagesUrl)
+
+      if (resolved) return resolved
+    } catch (error) {
+      console.error(`Failed to read GitHub Pages metadata for ${fullName}.`, error)
+    }
+  }
+
+  return ''
+}
+
+function clearPagesImage(repo) {
+  repo.pagesImage = ''
+}
+
 async function loadGithubRepos() {
   isLoadingRepos.value = true
   repoError.value = ''
@@ -95,24 +157,36 @@ async function loadGithubRepos() {
         }),
     )
 
-    githubRepos.value = reposWithTopics
-      .filter(({ topics }) => topics.some((topic) => topic.toLowerCase() === githubProjectTopic))
-      .map(({ repo, topics }) => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description?.trim() || 'No description added yet.',
-        homepage: repo.homepage?.trim() || '',
-        htmlUrl: repo.html_url,
-        language: repo.language,
-        stars: repo.stargazers_count,
-        createdAt: repo.created_at,
-        updatedAt: repo.updated_at,
-        archived: repo.archived,
-        hasPages: repo.has_pages,
-        pagesUrl: getGithubPagesUrl(repo),
-        topics,
-      }))
-      .sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
+    const projectRepos = reposWithTopics.filter(({ topics }) =>
+      topics.some((topic) => topic.toLowerCase() === githubProjectTopic),
+    )
+
+    githubRepos.value = (
+      await Promise.all(
+        projectRepos.map(async ({ repo, topics }) => {
+          const pagesUrl = getGithubPagesUrl(repo)
+          const pagesImage =
+            repo.has_pages && pagesUrl ? await getGithubPagesImage(repo.full_name, pagesUrl) : ''
+
+          return {
+            id: repo.id,
+            name: repo.name,
+            description: repo.description?.trim() || 'No description added yet.',
+            homepage: repo.homepage?.trim() || '',
+            htmlUrl: repo.html_url,
+            language: repo.language,
+            stars: repo.stargazers_count,
+            createdAt: repo.created_at,
+            updatedAt: repo.updated_at,
+            archived: repo.archived,
+            hasPages: repo.has_pages,
+            pagesUrl,
+            pagesImage,
+            topics,
+          }
+        }),
+      )
+    ).sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
   } catch (error) {
     console.error('Failed to load GitHub repositories.', error)
     repoError.value = 'GitHub repos could not be loaded right now.'
@@ -213,7 +287,32 @@ onMounted(() => {
       <v-row v-else-if="hasGithubRepos" dense>
         <v-col v-for="repo in githubRepos" :key="repo.id" cols="12" md="6">
           <v-card class="project-card h-100" rounded="xl" elevation="0">
-            <v-card-title class="d-flex align-center justify-space-between ga-3 flex-wrap">
+            <a
+              v-if="repo.pagesImage"
+              class="repo-preview-link"
+              :href="repo.pagesUrl || repo.htmlUrl"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div class="repo-preview">
+                <v-img
+                  :src="repo.pagesImage"
+                  width="100%"
+                  height="100%"
+                  class="repo-preview-image"
+                  :alt="`${repo.name} preview`"
+                  @error="clearPagesImage(repo)"
+                />
+                <div class="repo-preview-caption">
+                  <span class="repo-preview-title">{{ repo.name }}</span>
+                  <span v-if="repo.language" class="repo-preview-type">{{ repo.language }}</span>
+                </div>
+              </div>
+            </a>
+            <v-card-title
+              v-if="!repo.pagesImage"
+              class="d-flex align-center justify-space-between ga-3 flex-wrap"
+            >
               <span>{{ repo.name }}</span>
               <div class="repo-stats">
                 <span v-if="repo.language">{{ repo.language }}</span>
@@ -271,8 +370,63 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .project-card {
+  overflow: hidden;
   background: rgba(var(--v-theme-surface), 0.72);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.repo-preview-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.repo-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 630;
+  background: #111;
+}
+
+.repo-preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.repo-preview-image :deep(.v-img__img) {
+  object-fit: contain;
+}
+
+.repo-preview-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: rgba(0, 0, 0, 0.72);
+  color: #fff;
+}
+
+.repo-preview-title {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.repo-preview-type {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.92;
 }
 
 .header-copy {
