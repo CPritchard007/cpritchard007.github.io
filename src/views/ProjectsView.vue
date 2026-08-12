@@ -186,7 +186,13 @@ async function loadGithubRepos() {
           }
         }),
       )
-    ).sort((left, right) => new Date(right.createdAt) - new Date(left.createdAt))
+    ).sort((left, right) => {
+      if (left.hasPages !== right.hasPages) {
+        return left.hasPages ? -1 : 1
+      }
+
+      return new Date(right.createdAt) - new Date(left.createdAt)
+    })
   } catch (error) {
     console.error('Failed to load GitHub repositories.', error)
     repoError.value = 'GitHub repos could not be loaded right now.'
