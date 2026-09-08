@@ -165,8 +165,10 @@ async function loadGithubRepos() {
       await Promise.all(
         projectRepos.map(async ({ repo, topics }) => {
           const pagesUrl = getGithubPagesUrl(repo)
-          const pagesImage =
-            repo.has_pages && pagesUrl ? await getGithubPagesImage(repo.full_name, pagesUrl) : ''
+          // Temporarily skip preview images
+          const pagesImage = ''
+          // const pagesImage =
+          //   repo.has_pages && pagesUrl ? await getGithubPagesImage(repo.full_name, pagesUrl) : ''
 
           return {
             id: repo.id,
@@ -293,6 +295,7 @@ onMounted(() => {
       <v-row v-else-if="hasGithubRepos" dense>
         <v-col v-for="repo in githubRepos" :key="repo.id" cols="12" md="6">
           <v-card class="project-card h-100" rounded="xl" elevation="0">
+            <!-- Temporarily hide project preview images
             <a
               v-if="repo.pagesImage"
               class="repo-preview-link"
@@ -315,8 +318,8 @@ onMounted(() => {
                 </div>
               </div>
             </a>
+            -->
             <v-card-title
-              v-if="!repo.pagesImage"
               class="d-flex align-center justify-space-between ga-3 flex-wrap"
             >
               <span>{{ repo.name }}</span>
