@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTheme } from 'vuetify'
 import { onMounted } from 'vue'
+import avatar from './assets/photos/avatar.png'
 
 const drawer = ref(false)
 
@@ -49,7 +50,10 @@ onMounted(() => {
   <v-app>
     <v-app-bar elevation="0" class="app-bar" density="comfortable">
       <v-app-bar-nav-icon class="d-sm-none" @click="drawer = !drawer" />
-      <v-btn class="brand" variant="text" @click="goHome">Curtis Pritchard</v-btn>
+      <v-btn class="brand" variant="text" @click="goHome">
+        <img :src="avatar" alt="" class="brand-avatar" width="36" height="36">
+        Curtis Pritchard
+      </v-btn>
 
       <v-spacer />
 
@@ -133,6 +137,14 @@ onMounted(() => {
   font-weight: 800;
   letter-spacing: 0.2px;
   text-transform: none;
+}
+
+.brand-avatar {
+  width: 36px;
+  height: 36px;
+  margin-right: 8px;
+  object-fit: contain;
+  display: block;
 }
 
 .app-footer {
