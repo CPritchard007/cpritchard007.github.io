@@ -1,0 +1,52 @@
+name: Sync public GitHub repos JSON
+
+# Publishes only data/github-repos.json to the gh-pages branch so the
+# live site can refresh project cards without rebuilding the Vue app.
+# Only public, non-fork repositories are included.
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/generate-github-repos.mjs'
+      - 'src/utils/siteMetadata.js'
+      - '.github/workflows/sync-github-repos.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-data
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate public repos JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ vars.GITHUB_USERNAME || 'cpritchard007' }}
+          GITHUB_PROJECT_TOPIC: ${{ vars.GITHUB_PROJECT_TOPIC || 'project' }}
+        run: |
+          mkdir -p publish/data
+          node scripts/generate-github-repos.mjs --out publish/data/github-repos.json
+
+      - name: Publish JSON to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./publish
+          publish_branch: gh-pages
+          keep_files: true
+          commit_message: 'chore: sync public github repos json'

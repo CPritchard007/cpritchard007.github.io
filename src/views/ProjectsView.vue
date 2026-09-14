@@ -12,6 +12,8 @@ const router = useRouter()
 const githubUsername = import.meta.env.VITE_GITHUB_USERNAME ?? 'cpritchard007'
 const githubProjectTopic = (import.meta.env.VITE_GITHUB_PROJECT_TOPIC ?? 'project').toLowerCase()
 const githubProfileUrl = `https://github.com/${githubUsername}`
+const githubReposUrl = `${import.meta.env.BASE_URL}data/github-repos.json`
+
 const featuredProjects = ref(
   projects.map((project) => ({
     ...project,
@@ -50,82 +52,6 @@ function formatRepoCreatedAt(value) {
   }).format(new Date(value))
 }
 
-function getGithubPagesUrl(repo) {
-  if (!repo.has_pages) return ''
-
-  if (repo.homepage) {
-    return repo.homepage
-  }
-
-  const owner = repo.owner?.login ?? githubUsername
-  const normalizedRepoName = repo.name.toLowerCase()
-  const userPagesRepoName = `${owner.toLowerCase()}.github.io`
-
-  if (normalizedRepoName === userPagesRepoName) {
-    return `https://${owner}.github.io/`
-  }
-
-  return `https://${owner}.github.io/${repo.name}/`
-}
-
-function extractMetaImage(html) {
-  const tags = html.match(/<meta\b[^>]*>/gi) ?? []
-
-  const parsed = tags.map((tag) => {
-    const attrs = {}
-
-    for (const match of tag.matchAll(/([a-zA-Z:_-]+)\s*=\s*["']([^"']*)["']/g)) {
-      attrs[match[1].toLowerCase()] = match[2]
-    }
-
-    return attrs
-  })
-
-  const ogImage = parsed.find((attrs) => attrs.property === 'og:image' && attrs.content)
-  const twitterImage = parsed.find((attrs) => attrs.name === 'twitter:image' && attrs.content)
-
-  return ogImage?.content?.trim() || twitterImage?.content?.trim() || ''
-}
-
-function resolvePagesImageUrl(image, pagesUrl) {
-  if (!image || !pagesUrl) return ''
-
-  const normalized = image.replace('%BASE_URL%', '')
-  const base = pagesUrl.endsWith('/') ? pagesUrl : `${pagesUrl}/`
-
-  try {
-    return new URL(normalized, base).href
-  } catch {
-    return ''
-  }
-}
-
-async function getGithubPagesImage(fullName, pagesUrl) {
-  const contentPaths = ['index.html', 'docs/index.html']
-
-  for (const path of contentPaths) {
-    try {
-      const response = await fetch(`https://api.github.com/repos/${fullName}/contents/${path}`, {
-        headers: {
-          Accept: 'application/vnd.github.raw+json',
-        },
-      })
-
-      if (!response.ok) continue
-
-      const html = await response.text()
-      const image = extractMetaImage(html)
-      const resolved = resolvePagesImageUrl(image, pagesUrl)
-
-      if (resolved) return resolved
-    } catch (error) {
-      console.error(`Failed to read GitHub Pages metadata for ${fullName}.`, error)
-    }
-  }
-
-  return ''
-}
-
 function clearPagesImage(repo) {
   repo.pagesImage = ''
 }
@@ -147,91 +73,54 @@ async function loadFeaturedSiteIcons() {
   )
 }
 
+function normalizeRepo(repo) {
+  return {
+    id: repo.id,
+    name: repo.name,
+    description: repo.description?.trim() || 'No description added yet.',
+    homepage: repo.homepage?.trim() || '',
+    htmlUrl: repo.htmlUrl || repo.html_url || '',
+    language: repo.language || '',
+    stars: Number(repo.stars ?? repo.stargazers_count ?? 0),
+    createdAt: repo.createdAt || repo.created_at || '',
+    updatedAt: repo.updatedAt || repo.updated_at || '',
+    archived: Boolean(repo.archived),
+    hasPages: Boolean(repo.hasPages ?? repo.has_pages),
+    pagesUrl: repo.pagesUrl || '',
+    pagesImage: repo.pagesImage || '',
+    topics: Array.isArray(repo.topics) ? repo.topics : [],
+    siteUrl: repo.siteUrl || '',
+    siteIcon: repo.siteIcon || '',
+    siteIcons: Array.isArray(repo.siteIcons) ? repo.siteIcons : [],
+    siteColor: repo.siteColor || '',
+    siteIconPadded: repo.siteIconPadded !== false,
+  }
+}
+
 async function loadGithubRepos() {
   isLoadingRepos.value = true
   repoError.value = ''
 
   try {
-    const response = await fetch(
-      `https://api.github.com/users/${encodeURIComponent(githubUsername)}/repos?sort=updated&per_page=100&type=owner`,
-    )
+    const response = await fetch(githubReposUrl, { cache: 'no-cache' })
 
     if (!response.ok) {
-      throw new Error(`GitHub API returned ${response.status}`)
+      throw new Error(`GitHub repos JSON returned ${response.status}`)
     }
 
-    const repos = await response.json()
+    const payload = await response.json()
+    const repos = Array.isArray(payload) ? payload : (payload.repos ?? [])
 
-    const reposWithTopics = await Promise.all(
-      repos
-        .filter((repo) => !repo.fork && !repo.private)
-        .map(async (repo) => {
-          const topicsResponse = await fetch(`https://api.github.com/repos/${repo.full_name}/topics`, {
-            headers: {
-              Accept: 'application/vnd.github+json',
-            },
-          })
+    githubRepos.value = repos
+      .map(normalizeRepo)
+      .filter((repo) => Boolean(repo.id && repo.name && repo.htmlUrl))
+      .sort((left, right) => {
+        if (left.hasPages !== right.hasPages) {
+          return left.hasPages ? -1 : 1
+        }
 
-          if (!topicsResponse.ok) {
-            throw new Error(`GitHub topics API returned ${topicsResponse.status} for ${repo.full_name}`)
-          }
-
-          const topicData = await topicsResponse.json()
-
-          return {
-            repo,
-            topics: topicData.names ?? [],
-          }
-        }),
-    )
-
-    const projectRepos = reposWithTopics.filter(({ topics }) =>
-      topics.some((topic) => topic.toLowerCase() === githubProjectTopic),
-    )
-
-    githubRepos.value = (
-      await Promise.all(
-        projectRepos.map(async ({ repo, topics }) => {
-          const pagesUrl = getGithubPagesUrl(repo)
-          const siteUrl = pagesUrl || repo.homepage?.trim() || ''
-          // Temporarily skip preview images
-          const pagesImage = ''
-          // const pagesImage =
-          //   repo.has_pages && pagesUrl ? await getGithubPagesImage(repo.full_name, pagesUrl) : ''
-          const siteMeta = siteUrl
-            ? await fetchSiteMetadata(siteUrl, { githubFullName: repo.full_name })
-            : { icon: '', icons: [], themeColor: '', isAppIcon: false }
-
-          return {
-            id: repo.id,
-            name: repo.name,
-            description: repo.description?.trim() || 'No description added yet.',
-            homepage: repo.homepage?.trim() || '',
-            htmlUrl: repo.html_url,
-            language: repo.language,
-            stars: repo.stargazers_count,
-            createdAt: repo.created_at,
-            updatedAt: repo.updated_at,
-            archived: repo.archived,
-            hasPages: repo.has_pages,
-            pagesUrl,
-            pagesImage,
-            topics,
-            siteUrl,
-            siteIcon: siteMeta.icon,
-            siteIcons: siteMeta.icons,
-            siteColor: siteMeta.themeColor,
-            siteIconPadded: !siteMeta.isAppIcon,
-          }
-        }),
-      )
-    ).sort((left, right) => {
-      if (left.hasPages !== right.hasPages) {
-        return left.hasPages ? -1 : 1
-      }
-
-      return new Date(right.createdAt) - new Date(left.createdAt)
-    })
+        return new Date(right.createdAt) - new Date(left.createdAt)
+      })
   } catch (error) {
     console.error('Failed to load GitHub repositories.', error)
     repoError.value = 'GitHub repos could not be loaded right now.'

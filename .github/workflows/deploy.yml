@@ -40,6 +40,13 @@ jobs:
       - name: Prepare GitHub Pages
         run: node scripts/prepare-pages.mjs
 
+      - name: Generate public GitHub repos JSON
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_USERNAME: ${{ vars.GITHUB_USERNAME || 'cpritchard007' }}
+          GITHUB_PROJECT_TOPIC: ${{ vars.GITHUB_PROJECT_TOPIC || 'project' }}
+        run: node scripts/generate-github-repos.mjs --out dist/data/github-repos.json
+
       - name: Deploy (push to gh-pages branch)
         uses: peaceiris/actions-gh-pages@v4
         with:

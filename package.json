@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "npm run build && node scripts/prepare-pages.mjs && gh-pages -d dist -b gh-pages --dotfiles"
+    "generate:github-repos": "node scripts/generate-github-repos.mjs",
+    "deploy": "npm run build && node scripts/prepare-pages.mjs && npm run generate:github-repos -- --out dist/data/github-repos.json && gh-pages -d dist -b gh-pages --dotfiles"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",

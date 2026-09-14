@@ -23,6 +23,15 @@ npm run preview
 - The workflow defaults to `VITE_BASE=/` (works for `cpritchard007.github.io`)
 - If you deploy as a project site (`https://<user>.github.io/<repo>/`), set repo variable `VITE_BASE` to `/<repo>/`
 
+### Public GitHub repos feed (no client API)
+
+Project cards load from a static file on Pages: `/data/github-repos.json`.
+
+- `.github/workflows/sync-github-repos.yml` regenerates that file every **6 hours** (and on manual dispatch)
+- It writes **only public, non-fork** repos tagged with your project topic — private repos are never included
+- The Vue app is not rebuilt for data refreshes; only the JSON on `gh-pages` is updated
+- Locally: `npm run generate:github-repos` (writes `public/data/github-repos.json`)
+
 Do this once in GitHub:
 
 - Go to your repo → **Settings** → **Pages**
@@ -39,8 +48,8 @@ Company logo images are imported in Vue files, so Vite bundles them into `dist/a
 
 - **Name / links**: `src/App.vue`
 - **Featured projects list**: `src/data/projects.js`
-- **GitHub repo feed username**: set `VITE_GITHUB_USERNAME` (defaults to `cpritchard007`)
-- **GitHub repo topic filter**: set `VITE_GITHUB_PROJECT_TOPIC` (defaults to `project`)
+- **GitHub repo feed username**: set `VITE_GITHUB_USERNAME` or Actions variable `GITHUB_USERNAME` (defaults to `cpritchard007`)
+- **GitHub repo topic filter**: set `VITE_GITHUB_PROJECT_TOPIC` or Actions variable `GITHUB_PROJECT_TOPIC` (defaults to `project`)
 - **Pages**: `src/views/*`
 - **Theme colors**: `src/plugins/vuetify.js`
 
