@@ -1,7 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useDisplay } from 'vuetify'
 import { renderMarkdown } from '../utils/markdown'
+import { fetchSiteMetadata } from '../utils/siteMetadata'
+import SiteIcon from '../components/SiteIcon.vue'
 import TagChip from '../components/TagChip.vue'
 import taplaneDescription from '../data/taplane.md?raw'
 import gambitVenturesDescription from '../data/gambit-ventures.md?raw'
@@ -15,6 +17,11 @@ const timeline = ref([
     {
         id: 1,
         icon: taplaneIcon,
+        website: 'https://www.taplane.com/',
+        siteIcon: '',
+        siteIcons: [],
+        siteColor: '',
+        siteIconPadded: true,
         title: 'Software & Mobile Developer',
         description: taplaneDescription,
         location: 'Taplane Inc.',
@@ -51,6 +58,11 @@ const timeline = ref([
     },
     {
         id: 2,
+        website: 'https://www.gambitventures.ca/',
+        siteIcon: '',
+        siteIcons: [],
+        siteColor: '',
+        siteIconPadded: true,
         title: 'Front-End Developer',
         description: gambitVenturesDescription,
         location: 'Gambit Ventures Ltd.',
@@ -76,6 +88,11 @@ const timeline = ref([
     {
         id: 3,
         icon: codeninjaIcon,
+        website: 'https://www.codeninjas.com/',
+        siteIcon: '',
+        siteIcons: [],
+        siteColor: '',
+        siteIconPadded: true,
         title: 'Coding Sensei - Student Coding Mentor',
         description: codeninjaDescription,
         location: 'Code Ninja',
@@ -105,6 +122,20 @@ const timeline = ref([
         ],
     },
 ])
+
+onMounted(async () => {
+    await Promise.all(
+        timeline.value.map(async (item) => {
+            if (!item.website) return
+
+            const meta = await fetchSiteMetadata(item.website)
+            item.siteIcon = item.icon || meta.icon
+            item.siteIcons = [...(item.icon ? [item.icon] : []), ...meta.icons].filter(Boolean)
+            item.siteColor = meta.themeColor
+            item.siteIconPadded = !item.icon && !meta.isAppIcon
+        }),
+    )
+})
 </script>
 
 <template>
@@ -122,7 +153,17 @@ const timeline = ref([
                         </div>
                     </div>
 
-                    <h2 class="text-h6 mt-4 mb-2">{{ item.title }}</h2>
+                    <h2 class="text-h6 mt-4 mb-2 title-with-icon">
+                        <SiteIcon
+                            v-if="item.website && !item.icon"
+                            :src="item.siteIcon"
+                            :srcs="item.siteIcons"
+                            :background="item.siteColor"
+                            :padded="item.siteIconPadded"
+                            :alt="item.location"
+                        />
+                        <span>{{ item.title }}</span>
+                    </h2>
                     <div class="markdown" v-html="renderMarkdown(item.description)" />
 
                     <div class="mt-4 chip-row">
@@ -154,7 +195,17 @@ const timeline = ref([
                 </template>
 
                 <div>
-                    <h2 class="mb-2">{{ item.title }}</h2>
+                    <h2 class="mb-2 title-with-icon">
+                        <SiteIcon
+                            v-if="item.website && !item.icon"
+                            :src="item.siteIcon"
+                            :srcs="item.siteIcons"
+                            :background="item.siteColor"
+                            :padded="item.siteIconPadded"
+                            :alt="item.location"
+                        />
+                        <span>{{ item.title }}</span>
+                    </h2>
                     <div class="markdown" v-html="renderMarkdown(item.description)" />
                 </div>
 
@@ -216,5 +267,11 @@ const timeline = ref([
 .mobile-meta {
     flex: 1 1 auto;
     min-width: 0;
+}
+
+.title-with-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 </style>

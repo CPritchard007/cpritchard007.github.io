@@ -1,22 +1,33 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import SiteIcon from '../components/SiteIcon.vue'
 import TagChip from '../components/TagChip.vue'
 import { projects } from '../data/projects'
 import { renderMarkdown } from '../utils/markdown'
+import { fetchSiteMetadata } from '../utils/siteMetadata'
 
 const router = useRouter()
 
 const githubUsername = import.meta.env.VITE_GITHUB_USERNAME ?? 'cpritchard007'
 const githubProjectTopic = (import.meta.env.VITE_GITHUB_PROJECT_TOPIC ?? 'project').toLowerCase()
 const githubProfileUrl = `https://github.com/${githubUsername}`
-const featuredProjects = projects
+const featuredProjects = ref(
+  projects.map((project) => ({
+    ...project,
+    siteUrl: project.links?.demo || project.links?.repo || '',
+    siteIcon: '',
+    siteIcons: [],
+    siteColor: '',
+    siteIconPadded: true,
+  })),
+)
 
 const githubRepos = ref([])
 const isLoadingRepos = ref(true)
 const repoError = ref('')
 
-const hasFeaturedProjects = computed(() => featuredProjects.length > 0)
+const hasFeaturedProjects = computed(() => featuredProjects.value.length > 0)
 const hasGithubRepos = computed(() => githubRepos.value.length > 0)
 
 function viewCompanyProjects() {
@@ -119,6 +130,23 @@ function clearPagesImage(repo) {
   repo.pagesImage = ''
 }
 
+async function applySiteMetadata(item, url, githubFullName) {
+  if (!url) return
+
+  const meta = await fetchSiteMetadata(url, { githubFullName })
+  item.siteUrl = url
+  item.siteIcon = meta.icon
+  item.siteIcons = meta.icons
+  item.siteColor = meta.themeColor
+  item.siteIconPadded = !meta.isAppIcon
+}
+
+async function loadFeaturedSiteIcons() {
+  await Promise.all(
+    featuredProjects.value.map((project) => applySiteMetadata(project, project.siteUrl)),
+  )
+}
+
 async function loadGithubRepos() {
   isLoadingRepos.value = true
   repoError.value = ''
@@ -165,10 +193,14 @@ async function loadGithubRepos() {
       await Promise.all(
         projectRepos.map(async ({ repo, topics }) => {
           const pagesUrl = getGithubPagesUrl(repo)
+          const siteUrl = pagesUrl || repo.homepage?.trim() || ''
           // Temporarily skip preview images
           const pagesImage = ''
           // const pagesImage =
           //   repo.has_pages && pagesUrl ? await getGithubPagesImage(repo.full_name, pagesUrl) : ''
+          const siteMeta = siteUrl
+            ? await fetchSiteMetadata(siteUrl, { githubFullName: repo.full_name })
+            : { icon: '', icons: [], themeColor: '', isAppIcon: false }
 
           return {
             id: repo.id,
@@ -185,6 +217,11 @@ async function loadGithubRepos() {
             pagesUrl,
             pagesImage,
             topics,
+            siteUrl,
+            siteIcon: siteMeta.icon,
+            siteIcons: siteMeta.icons,
+            siteColor: siteMeta.themeColor,
+            siteIconPadded: !siteMeta.isAppIcon,
           }
         }),
       )
@@ -204,6 +241,7 @@ async function loadGithubRepos() {
 }
 
 onMounted(() => {
+  loadFeaturedSiteIcons()
   loadGithubRepos()
 })
 </script>
@@ -236,7 +274,17 @@ onMounted(() => {
         <v-col v-for="project in featuredProjects" :key="project.title" cols="12" md="6">
           <v-card class="project-card h-100" rounded="xl" elevation="0">
             <v-card-title class="d-flex align-center justify-space-between ga-3">
-              <span>{{ project.title }}</span>
+              <span class="card-title-text">
+                <SiteIcon
+                  v-if="project.siteUrl"
+                  :src="project.siteIcon"
+                  :srcs="project.siteIcons"
+                  :background="project.siteColor"
+                  :padded="project.siteIconPadded"
+                  :alt="project.title"
+                />
+                <span>{{ project.title }}</span>
+              </span>
             </v-card-title>
             <v-card-text class="lead">
               <div class="markdown" v-html="renderMarkdown(project.description)" />
@@ -322,7 +370,17 @@ onMounted(() => {
             <v-card-title
               class="d-flex align-center justify-space-between ga-3 flex-wrap"
             >
-              <span>{{ repo.name }}</span>
+              <span class="card-title-text">
+                <SiteIcon
+                  v-if="repo.siteUrl"
+                  :src="repo.siteIcon"
+                  :srcs="repo.siteIcons"
+                  :background="repo.siteColor"
+                  :padded="repo.siteIconPadded"
+                  :alt="repo.name"
+                />
+                <span>{{ repo.name }}</span>
+              </span>
               <div class="repo-stats">
                 <span v-if="repo.language">{{ repo.language }}</span>
                 <span v-if="repo.stars > 0">
@@ -461,6 +519,13 @@ onMounted(() => {
 .section-meta {
   opacity: 0.7;
   font-size: 0.95rem;
+}
+
+.card-title-text {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 10px;
 }
 
 .repo-stats {
