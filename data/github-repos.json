@@ -1,0 +1,383 @@
+{
+  "generatedAt": "2026-09-14T17:47:18.706Z",
+  "username": "cpritchard007",
+  "topic": "project",
+  "visibility": "public",
+  "repos": [
+    {
+      "id": 1368972555,
+      "name": "maple-crossing",
+      "fullName": "CPritchard007/maple-crossing",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/maple-crossing",
+      "language": "JavaScript",
+      "stars": 0,
+      "createdAt": "2026-09-13T22:32:52Z",
+      "updatedAt": "2026-09-14T00:29:43Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/maple-crossing/",
+      "pagesImage": "",
+      "topics": [
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/maple-crossing/",
+      "siteIcon": "https://cpritchard007.github.io/maple-crossing/apple-touch-icon.png",
+      "siteIcons": [
+        "https://cpritchard007.github.io/maple-crossing/apple-touch-icon.png",
+        "https://cpritchard007.github.io/maple-crossing/favicon.svg",
+        "https://cpritchard007.github.io/maple-crossing/favicon.ico",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#f4f1ea",
+      "siteIconPadded": false
+    },
+    {
+      "id": 1332488435,
+      "name": "driving-sim-gpx-recorder",
+      "fullName": "CPritchard007/driving-sim-gpx-recorder",
+      "description": "Create GPX files using an arcade style for closer visual look to an actual driving trip!",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/driving-sim-gpx-recorder",
+      "language": "TypeScript",
+      "stars": 0,
+      "createdAt": "2026-08-12T22:21:41Z",
+      "updatedAt": "2026-08-13T12:33:58Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/driving-sim-gpx-recorder/",
+      "pagesImage": "",
+      "topics": [
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/driving-sim-gpx-recorder/",
+      "siteIcon": "https://cpritchard007.github.io/driving-sim-gpx-recorder/favicon.svg",
+      "siteIcons": [
+        "https://cpritchard007.github.io/driving-sim-gpx-recorder/favicon.svg",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 1156900946,
+      "name": "cpritchard007.github.io",
+      "fullName": "CPritchard007/cpritchard007.github.io",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/cpritchard007.github.io",
+      "language": "Vue",
+      "stars": 0,
+      "createdAt": "2026-02-13T07:22:03Z",
+      "updatedAt": "2026-09-14T17:47:04Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/",
+      "pagesImage": "",
+      "topics": [
+        "portfolio",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/",
+      "siteIcon": "https://cpritchard007.github.io/vite.svg",
+      "siteIcons": [
+        "https://cpritchard007.github.io/vite.svg",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 428366057,
+      "name": "gambit-ventures-condo-blinds",
+      "fullName": "CPritchard007/gambit-ventures-condo-blinds",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/gambit-ventures-condo-blinds",
+      "language": "TypeScript",
+      "stars": 0,
+      "createdAt": "2021-11-15T17:51:39Z",
+      "updatedAt": "2026-06-29T22:18:00Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/gambit-ventures-condo-blinds/",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2021",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/gambit-ventures-condo-blinds/",
+      "siteIcon": "https://cpritchard007.github.io/gambit-ventures-condo-blinds/favicon.ico",
+      "siteIcons": [
+        "https://cpritchard007.github.io/gambit-ventures-condo-blinds/favicon.ico",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#7B1FA2",
+      "siteIconPadded": true
+    },
+    {
+      "id": 397704462,
+      "name": "gambit-ventures-application-pwa",
+      "fullName": "CPritchard007/gambit-ventures-application-pwa",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/gambit-ventures-application-pwa",
+      "language": "TypeScript",
+      "stars": 0,
+      "createdAt": "2021-08-18T18:49:41Z",
+      "updatedAt": "2026-06-29T22:22:31Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/gambit-ventures-application-pwa/",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2021",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/gambit-ventures-application-pwa/",
+      "siteIcon": "https://cpritchard007.github.io/gambit-ventures-application-pwa/favicon.ico",
+      "siteIcons": [
+        "https://cpritchard007.github.io/gambit-ventures-application-pwa/favicon.ico",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#000000",
+      "siteIconPadded": false
+    },
+    {
+      "id": 383842923,
+      "name": "gambit-ventures-help-desk",
+      "fullName": "CPritchard007/gambit-ventures-help-desk",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/gambit-ventures-help-desk",
+      "language": "TypeScript",
+      "stars": 0,
+      "createdAt": "2021-07-07T15:22:43Z",
+      "updatedAt": "2026-06-29T22:21:19Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/gambit-ventures-help-desk/",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2021",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/gambit-ventures-help-desk/",
+      "siteIcon": "https://cpritchard007.github.io/gambit-ventures-help-desk/favicon.ico",
+      "siteIcons": [
+        "https://cpritchard007.github.io/gambit-ventures-help-desk/favicon.ico",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 319899662,
+      "name": "portfolio-2021",
+      "fullName": "CPritchard007/portfolio-2021",
+      "description": "updated version of a portfolio",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/portfolio-2021",
+      "language": "HTML",
+      "stars": 0,
+      "createdAt": "2020-12-09T09:03:53Z",
+      "updatedAt": "2026-06-29T22:28:42Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/portfolio-2021/",
+      "pagesImage": "",
+      "topics": [
+        "portfolio-2021",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/portfolio-2021/",
+      "siteIcon": "https://cpritchard007.github.io/portfolio-2021/resources/favicon.png",
+      "siteIcons": [
+        "https://cpritchard007.github.io/portfolio-2021/resources/favicon.png",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 315212598,
+      "name": "warriorship",
+      "fullName": "CPritchard007/warriorship",
+      "description": "this is a class application on the Japanese warriors, more to be seen later on",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/warriorship",
+      "language": "HTML",
+      "stars": 0,
+      "createdAt": "2020-11-23T05:45:54Z",
+      "updatedAt": "2026-06-29T22:42:18Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/warriorship/",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2020",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/warriorship/",
+      "siteIcon": "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128",
+      "siteIcons": [
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 217810785,
+      "name": "portfolio-2022",
+      "fullName": "CPritchard007/portfolio-2022",
+      "description": "This is my portfolio",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/portfolio-2022",
+      "language": "TypeScript",
+      "stars": 0,
+      "createdAt": "2019-10-27T05:44:32Z",
+      "updatedAt": "2026-06-29T22:28:17Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/portfolio-2022/",
+      "pagesImage": "",
+      "topics": [
+        "portfolio-2022",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/portfolio-2022/",
+      "siteIcon": "https://cpritchard007.github.io/portfolio-2022/favicon.ico",
+      "siteIcons": [
+        "https://cpritchard007.github.io/portfolio-2022/favicon.ico",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 1271712255,
+      "name": "carplay-native",
+      "fullName": "CPritchard007/carplay-native",
+      "description": "Simple Implementation of Carplay and Background Mode",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/carplay-native",
+      "language": "Dart",
+      "stars": 0,
+      "createdAt": "2026-06-17T00:12:01Z",
+      "updatedAt": "2026-06-29T22:26:18Z",
+      "archived": false,
+      "hasPages": false,
+      "pagesUrl": "",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2026",
+        "project",
+        "proof-of-concept"
+      ],
+      "siteUrl": "",
+      "siteIcon": "",
+      "siteIcons": [],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 1266367737,
+      "name": "shell-accessories",
+      "fullName": "CPritchard007/shell-accessories",
+      "description": "a wide selection of command extensions that I thought where neat",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/shell-accessories",
+      "language": "Shell",
+      "stars": 0,
+      "createdAt": "2026-06-11T14:52:58Z",
+      "updatedAt": "2026-06-29T22:14:43Z",
+      "archived": false,
+      "hasPages": false,
+      "pagesUrl": "",
+      "pagesImage": "",
+      "topics": [
+        "project"
+      ],
+      "siteUrl": "",
+      "siteIcon": "",
+      "siteIcons": [],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 1253026417,
+      "name": "sql-dump-editor",
+      "fullName": "CPritchard007/sql-dump-editor",
+      "description": "allow you to edit sql tables directly from the sql dump, for easy changes with AI",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/sql-dump-editor",
+      "language": "Python",
+      "stars": 0,
+      "createdAt": "2026-05-29T05:01:17Z",
+      "updatedAt": "2026-06-29T22:15:30Z",
+      "archived": false,
+      "hasPages": false,
+      "pagesUrl": "",
+      "pagesImage": "",
+      "topics": [
+        "project"
+      ],
+      "siteUrl": "",
+      "siteIcon": "",
+      "siteIcons": [],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 1252999556,
+      "name": "unamed-clicker-game",
+      "fullName": "CPritchard007/unamed-clicker-game",
+      "description": "my first attempt at a clicker game, it may not be good, but that is ok",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/unamed-clicker-game",
+      "language": "Vue",
+      "stars": 0,
+      "createdAt": "2026-05-29T04:20:42Z",
+      "updatedAt": "2026-06-29T22:08:49Z",
+      "archived": false,
+      "hasPages": false,
+      "pagesUrl": "",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2026",
+        "project"
+      ],
+      "siteUrl": "",
+      "siteIcon": "",
+      "siteIcons": [],
+      "siteColor": "",
+      "siteIconPadded": true
+    },
+    {
+      "id": 315431937,
+      "name": "pokemon-tcg-companion-app",
+      "fullName": "CPritchard007/pokemon-tcg-companion-app",
+      "description": "The application that allows the user to store there decks",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/pokemon-tcg-companion-app",
+      "language": "Swift",
+      "stars": 0,
+      "createdAt": "2020-11-23T20:24:36Z",
+      "updatedAt": "2026-06-29T22:14:08Z",
+      "archived": false,
+      "hasPages": false,
+      "pagesUrl": "",
+      "pagesImage": "",
+      "topics": [
+        "dropped-2019",
+        "project"
+      ],
+      "siteUrl": "",
+      "siteIcon": "",
+      "siteIcons": [],
+      "siteColor": "",
+      "siteIconPadded": true
+    }
+  ]
+}
