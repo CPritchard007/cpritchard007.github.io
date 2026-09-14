@@ -1,13 +1,10 @@
 <script setup>
-import { onMounted, reactive } from 'vue'
-import SiteIcon from '../components/SiteIcon.vue'
 import { renderMarkdown } from '../utils/markdown'
-import { fetchSiteMetadata } from '../utils/siteMetadata'
 import firstrobotics_4838 from '../data/firstrobotics_4838.md?raw'
 import firstrobotics_4936 from '../data/firstrobotics_4936.md?raw'
 import robotics_4838 from '../assets/photos/robotics_4838.jpg'
 
-const volunteering = reactive([
+const volunteering = [
     {
         id: 1,
         name: 'First Robotics',
@@ -18,11 +15,6 @@ const volunteering = reactive([
                 dates: '2022 - 2024',
                 image: robotics_4838,
                 description: firstrobotics_4838,
-                siteUrl: 'https://github.com/riverrouge4838',
-                siteIcon: '',
-                siteIcons: [],
-                siteColor: '',
-                siteIconPadded: true,
                 actions: [
                     {
                         text: 'Github',
@@ -39,25 +31,7 @@ const volunteering = reactive([
             },
         ]
     },
-])
-
-onMounted(async () => {
-    await Promise.all(
-        volunteering.flatMap((item) =>
-            item.children.map(async (child) => {
-                const url = child.siteUrl || child.actions?.[0]?.href
-                if (!url) return
-
-                const meta = await fetchSiteMetadata(url)
-                child.siteUrl = url
-                child.siteIcon = meta.icon
-                child.siteIcons = meta.icons
-                child.siteColor = meta.themeColor
-                child.siteIconPadded = !meta.isAppIcon
-            }),
-        ),
-    )
-})
+]
 </script>
 
 <template>
@@ -71,17 +45,7 @@ onMounted(async () => {
                     <v-card class="h-100">
                         <v-img v-if="child.image" :src="child.image" width="100%"  max-height="180px" cover />
                         <div v-else class="no-image"></div>
-                        <v-card-title class="card-title">
-                            <SiteIcon
-                                v-if="child.siteUrl"
-                                :src="child.siteIcon"
-                                :srcs="child.siteIcons"
-                                :background="child.siteColor"
-                                :padded="child.siteIconPadded"
-                                :alt="child.name"
-                            />
-                            <span>{{ child.name }}</span>
-                        </v-card-title>
+                        <v-card-title class="text-center">{{child.name}}</v-card-title>
                         <v-card-subtitle class="text-secondary font-weight-bold">{{ child.dates }}</v-card-subtitle>
                         <v-card-text class="markdown" v-html="renderMarkdown(child.description)"></v-card-text>
                         <v-card-actions class="px-4 pb-4">
@@ -112,13 +76,6 @@ onMounted(async () => {
 .markdown :deep(ul),
 .markdown :deep(ol) {
     margin: 0.25rem 0 0.75rem 1.25rem;
-}
-
-.card-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
 .no-image {
