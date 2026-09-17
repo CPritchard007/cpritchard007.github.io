@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T03:56:17.717Z",
+  "generatedAt": "2026-09-17T05:10:42.966Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
@@ -14,7 +14,7 @@
       "language": "TypeScript",
       "stars": 0,
       "createdAt": "2026-09-17T03:53:39Z",
-      "updatedAt": "2026-09-17T03:55:36Z",
+      "updatedAt": "2026-09-17T04:03:14Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/asl-opencv-test/",
@@ -24,9 +24,9 @@
         "project"
       ],
       "siteUrl": "https://CPritchard007.github.io/asl-opencv-test/",
-      "siteIcon": "https://cpritchard007.github.io/opencv-project/favicon.svg",
+      "siteIcon": "https://cpritchard007.github.io/asl-opencv-test/favicon.svg",
       "siteIcons": [
-        "https://cpritchard007.github.io/opencv-project/favicon.svg",
+        "https://cpritchard007.github.io/asl-opencv-test/favicon.svg",
         "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
       ],
       "siteColor": "",
