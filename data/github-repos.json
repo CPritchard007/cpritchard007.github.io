@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T16:28:31.526Z",
+  "generatedAt": "2026-09-17T19:27:33.849Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
@@ -125,12 +125,13 @@
       "language": "TypeScript",
       "stars": 0,
       "createdAt": "2026-08-12T22:21:41Z",
-      "updatedAt": "2026-08-13T12:33:58Z",
+      "updatedAt": "2026-09-17T19:21:07Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/driving-sim-gpx-recorder/",
       "pagesImage": "",
       "topics": [
+        "favourites",
         "project"
       ],
       "siteUrl": "https://CPritchard007.github.io/driving-sim-gpx-recorder/",
@@ -152,7 +153,7 @@
       "language": "Vue",
       "stars": 0,
       "createdAt": "2026-02-13T07:22:03Z",
-      "updatedAt": "2026-09-14T19:15:53Z",
+      "updatedAt": "2026-09-17T19:27:08Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/",
