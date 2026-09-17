@@ -31,6 +31,21 @@ const repoError = ref('')
 
 const hasFeaturedProjects = computed(() => featuredProjects.value.length > 0)
 const hasGithubRepos = computed(() => githubRepos.value.length > 0)
+const repoSections = computed(() => {
+  const favourites = []
+  const remaining = []
+
+  for (const repo of githubRepos.value) {
+    const isFavourite = repo.topics.some((topic) => topic.toLowerCase() === 'favourites')
+    const group = isFavourite ? favourites : remaining
+    group.push(repo)
+  }
+
+  return [
+    ...(favourites.length ? [{ title: '⭐️ Favourites', repos: favourites, favourites: true }] : []),
+    { title: 'Public GitHub Repositories', repos: remaining, favourites: false },
+  ]
+})
 
 function viewCompanyProjects() {
   router.push({ name: 'work-experience' })
@@ -209,28 +224,28 @@ onMounted(() => {
       </v-row>
     </section>
 
-    <section class="mb-4">
+    <section v-for="section in repoSections" :key="section.title" class="mb-8">
       <div class="section-header">
-        <h2 class="section-heading mb-0">Public GitHub Repositories</h2>
-        <span class="section-meta">{{ githubUsername }} · topic: {{ githubProjectTopic }}</span>
+        <h2 class="section-heading mb-0">{{ section.title }}</h2>
+        <span v-if="!section.favourites" class="section-meta">{{ githubUsername }} · topic: {{ githubProjectTopic }}</span>
       </div>
 
       <v-alert
-        v-if="repoError"
+        v-if="repoError && !section.favourites"
         type="warning"
         variant="tonal"
         class="mb-4"
         text="GitHub repos could not be loaded right now. You can still view them on GitHub."
       />
 
-      <v-row v-if="isLoadingRepos" dense>
+      <v-row v-if="isLoadingRepos && !section.favourites" dense>
         <v-col v-for="item in 4" :key="item" cols="12" md="6">
           <v-skeleton-loader class="project-card" type="article, actions" />
         </v-col>
       </v-row>
 
-      <v-row v-else-if="hasGithubRepos" dense>
-        <v-col v-for="repo in githubRepos" :key="repo.id" cols="12" md="6">
+      <v-row v-else-if="section.repos.length" dense>
+        <v-col v-for="repo in section.repos" :key="repo.id" cols="12" md="6">
           <v-card class="project-card h-100" rounded="xl" elevation="0">
             <!-- Temporarily hide project preview images
             <a
@@ -316,7 +331,7 @@ onMounted(() => {
         </v-col>
       </v-row>
 
-      <div v-else-if="!hasFeaturedProjects" class="empty-state">
+      <div v-else-if="!hasGithubRepos && !hasFeaturedProjects" class="empty-state">
         <p class="mb-2">No public GitHub repos tagged "{{ githubProjectTopic }}" were found yet.</p>
         <button class="text-primary" @click="viewCompanyProjects">View Work Projects</button>
       </div>
