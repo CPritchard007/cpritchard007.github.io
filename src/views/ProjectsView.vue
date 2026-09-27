@@ -1,6 +1,7 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useDisplay } from 'vuetify'
 import SiteIcon from '../components/SiteIcon.vue'
 import TagChip from '../components/TagChip.vue'
 import { projects } from '../data/projects'
@@ -8,6 +9,7 @@ import { renderMarkdown } from '../utils/markdown'
 import { fetchSiteMetadata } from '../utils/siteMetadata'
 
 const router = useRouter()
+const { mdAndUp } = useDisplay()
 
 const githubUsername = import.meta.env.VITE_GITHUB_USERNAME ?? 'cpritchard007'
 const githubProjectTopic = (import.meta.env.VITE_GITHUB_PROJECT_TOPIC ?? 'project').toLowerCase()
@@ -245,9 +247,8 @@ onMounted(() => {
       </v-row>
 
       <v-row v-else-if="section.repos.length" dense>
-        <v-col v-for="repo in section.repos" :key="repo.id" cols="12" md="6">
+        <v-col v-for="(repo, index) in section.repos" :key="repo.id" cols="12" md="6">
           <v-card class="project-card h-100" rounded="xl" elevation="0">
-            <!-- Temporarily hide project preview images
             <a
               v-if="repo.pagesImage"
               class="repo-preview-link"
@@ -270,7 +271,11 @@ onMounted(() => {
                 </div>
               </div>
             </a>
-            -->
+            <div
+              v-else-if="mdAndUp && section.repos[index % 2 === 0 ? index + 1 : index - 1]?.pagesImage"
+              class="repo-preview repo-preview-placeholder"
+              aria-hidden="true"
+            />
             <v-card-title
               class="d-flex align-center justify-space-between ga-3 flex-wrap"
             >
@@ -357,6 +362,10 @@ onMounted(() => {
   width: 100%;
   aspect-ratio: 1200 / 630;
   background: #111;
+}
+
+.repo-preview-placeholder {
+  background: rgba(var(--v-theme-on-surface), 0.06);
 }
 
 .repo-preview-image {

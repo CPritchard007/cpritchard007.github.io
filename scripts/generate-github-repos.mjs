@@ -195,6 +195,7 @@ async function buildSiteMetadata(siteUrl, fullName) {
   const usedFallbackOnly = !meta.icon && Boolean(fallbackIcon)
 
   return {
+    image: resolveSiteUrl(meta.image, siteUrl),
     icon: resolvedIcons[0] || '',
     icons: resolvedIcons,
     themeColor: meta.themeColor || '',
@@ -221,7 +222,7 @@ async function buildRepoRecord(repo, topics, username) {
     archived: repo.archived,
     hasPages: repo.has_pages,
     pagesUrl,
-    pagesImage: '',
+    pagesImage: siteMeta.image || '',
     topics,
     siteUrl,
     siteIcon: siteMeta.icon,

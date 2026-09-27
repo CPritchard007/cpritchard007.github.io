@@ -41,10 +41,15 @@ export function extractSiteMetadata(html) {
   const linkTags = html.match(/<link\b[^>]*>/gi) ?? []
   const icons = []
   let themeColor = ''
+  let openGraphImage = ''
+  let twitterImage = ''
 
   for (const tag of metaTags) {
     const attrs = parseTagAttributes(tag)
     const name = String(attrs.name ?? '').toLowerCase()
+    const property = String(attrs.property ?? attrs.name ?? '').toLowerCase()
+    if (property === 'og:image' && !openGraphImage) openGraphImage = attrs.content?.trim() || ''
+    if (property === 'twitter:image' && !twitterImage) twitterImage = attrs.content?.trim() || ''
 
     if (name === 'theme-color' && attrs.content && !themeColor) {
       themeColor = attrs.content.trim()
@@ -76,6 +81,7 @@ export function extractSiteMetadata(html) {
   icons.sort((left, right) => right.score - left.score)
 
   return {
+    image: (openGraphImage || twitterImage).replaceAll('&amp;', '&'),
     icon: icons[0]?.href ?? '',
     icons: icons.map((icon) => icon.href),
     themeColor,
