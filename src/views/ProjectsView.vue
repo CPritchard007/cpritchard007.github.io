@@ -277,6 +277,7 @@ onMounted(() => {
               aria-hidden="true"
             />
             <v-card-title
+              v-if="!repo.pagesImage"
               class="d-flex align-center justify-space-between ga-3 flex-wrap"
             >
               <span class="card-title-text">
@@ -304,6 +305,11 @@ onMounted(() => {
 
             <v-card-text class="chip-row">
               <TagChip v-if="repo.language" :text="repo.language" />
+              <TagChip
+                v-if="repo.pagesImage && repo.stars > 0"
+                :text="`☆ ${repo.stars}`"
+                :wiki-enabled="false"
+              />
               <TagChip v-if="repo.archived" text="Archived" :wiki-enabled="false" />
               <TagChip v-for="topic in repo.topics" :key="topic" :text="`#${topic}`" />
               <TagChip :text="`Created ${formatRepoCreatedAt(repo.createdAt)}`" :wiki-enabled="false" />
