@@ -1,9 +1,38 @@
 {
-  "generatedAt": "2026-09-26T20:45:36.837Z",
+  "generatedAt": "2026-09-27T03:45:37.909Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
   "repos": [
+    {
+      "id": 1390033272,
+      "name": "maple-crossing-ai-travel-assistant",
+      "fullName": "CPritchard007/maple-crossing-ai-travel-assistant",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/maple-crossing-ai-travel-assistant",
+      "language": "Dart",
+      "stars": 0,
+      "createdAt": "2026-09-27T03:19:10Z",
+      "updatedAt": "2026-09-27T03:37:44Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/maple-crossing-ai-travel-assistant/",
+      "pagesImage": "https://cpritchard007.github.io/maple-crossing-ai-travel-assistant/images/maple-crossing-preview.png",
+      "topics": [
+        "favourites",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/maple-crossing-ai-travel-assistant/",
+      "siteIcon": "https://cpritchard007.github.io/maple-crossing-ai-travel-assistant/icons/apple-touch-icon.png",
+      "siteIcons": [
+        "https://cpritchard007.github.io/maple-crossing-ai-travel-assistant/icons/apple-touch-icon.png",
+        "https://cpritchard007.github.io/maple-crossing-ai-travel-assistant/favicon.png?v=maple-crossing",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#000000",
+      "siteIconPadded": false
+    },
     {
       "id": 1375279354,
       "name": "brick-breaker-ultimate",
@@ -123,13 +152,12 @@
       "language": "JavaScript",
       "stars": 0,
       "createdAt": "2026-09-13T22:32:52Z",
-      "updatedAt": "2026-09-23T22:38:06Z",
+      "updatedAt": "2026-09-27T03:21:25Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/maple-crossing/",
-      "pagesImage": "",
+      "pagesImage": "https://cpritchard007.github.io/maple-crossing/social/maple-crossing.png",
       "topics": [
-        "favourites",
         "project"
       ],
       "siteUrl": "https://CPritchard007.github.io/maple-crossing/",
@@ -157,7 +185,7 @@
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/driving-sim-gpx-recorder/",
-      "pagesImage": "",
+      "pagesImage": "https://cpritchard007.github.io/driving-sim-gpx-recorder/social/gpx-drive-og.png",
       "topics": [
         "favourites",
         "project"
@@ -181,7 +209,7 @@
       "language": "Vue",
       "stars": 0,
       "createdAt": "2026-02-13T07:22:03Z",
-      "updatedAt": "2026-09-17T19:27:08Z",
+      "updatedAt": "2026-09-27T03:45:22Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/",
@@ -297,7 +325,7 @@
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/portfolio-2021/",
-      "pagesImage": "",
+      "pagesImage": "https://cpritchard007.github.io/resources/favicon.png",
       "topics": [
         "portfolio-2021",
         "project"
