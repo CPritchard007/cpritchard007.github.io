@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T02:37:19.367Z",
+  "generatedAt": "2026-10-14T03:02:40.702Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
@@ -12,13 +12,13 @@
       "homepage": "",
       "htmlUrl": "https://github.com/CPritchard007/puppet-wars-recomp",
       "language": "JavaScript",
-      "stars": 1,
+      "stars": 2,
       "createdAt": "2026-10-14T00:59:14Z",
-      "updatedAt": "2026-10-14T02:36:44Z",
+      "updatedAt": "2026-10-14T02:58:12Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/puppet-wars-recomp/",
-      "pagesImage": "https://cpritchard007.github.io/puppet_wars_recomp/social/puppet-war-preview.png",
+      "pagesImage": "https://cpritchard007.github.io/puppet-wars-recomp/social/puppet-war-preview.jpg",
       "topics": [
         "favourites",
         "in-development",
