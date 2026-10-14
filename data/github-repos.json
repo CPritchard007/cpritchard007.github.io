@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T16:44:53.975Z",
+  "generatedAt": "2026-10-14T21:21:43.958Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
@@ -14,7 +14,7 @@
       "language": "C",
       "stars": 0,
       "createdAt": "2026-10-14T14:16:01Z",
-      "updatedAt": "2026-10-14T16:02:22Z",
+      "updatedAt": "2026-10-14T19:10:33Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/zombie-cafe-recomp/",
@@ -129,13 +129,12 @@
       "language": "Vue",
       "stars": 0,
       "createdAt": "2026-09-17T15:01:02Z",
-      "updatedAt": "2026-09-17T19:33:23Z",
+      "updatedAt": "2026-10-14T18:43:26Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/web-based-mecca-chamelion/",
       "pagesImage": "",
       "topics": [
-        "favourites",
         "project"
       ],
       "siteUrl": "https://CPritchard007.github.io/web-based-mecca-chamelion/",
