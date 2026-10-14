@@ -1,9 +1,38 @@
 {
-  "generatedAt": "2026-10-14T11:24:05.083Z",
+  "generatedAt": "2026-10-14T14:24:45.702Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
   "repos": [
+    {
+      "id": 1419103536,
+      "name": "zombie-cafe-recomp",
+      "fullName": "CPritchard007/zombie-cafe-recomp",
+      "description": "No description added yet.",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/zombie-cafe-recomp",
+      "language": "C",
+      "stars": 0,
+      "createdAt": "2026-10-14T14:16:01Z",
+      "updatedAt": "2026-10-14T14:22:14Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/zombie-cafe-recomp/",
+      "pagesImage": "",
+      "topics": [
+        "favourites",
+        "in-development",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/zombie-cafe-recomp/",
+      "siteIcon": "https://cpritchard007.github.io/zombie-cafe-recomp/assets/chef.png",
+      "siteIcons": [
+        "https://cpritchard007.github.io/zombie-cafe-recomp/assets/chef.png",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#202d29",
+      "siteIconPadded": true
+    },
     {
       "id": 1418191034,
       "name": "puppet-wars-recomp",
