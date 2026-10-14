@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T14:24:45.702Z",
+  "generatedAt": "2026-10-14T14:43:17.526Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
@@ -14,24 +14,26 @@
       "language": "C",
       "stars": 0,
       "createdAt": "2026-10-14T14:16:01Z",
-      "updatedAt": "2026-10-14T14:22:14Z",
+      "updatedAt": "2026-10-14T14:37:43Z",
       "archived": false,
       "hasPages": true,
       "pagesUrl": "https://CPritchard007.github.io/zombie-cafe-recomp/",
-      "pagesImage": "",
+      "pagesImage": "https://cpritchard007.github.io/zombie-cafe-recomp/assets/metadata/original-title-preview.png",
       "topics": [
         "favourites",
         "in-development",
         "project"
       ],
       "siteUrl": "https://CPritchard007.github.io/zombie-cafe-recomp/",
-      "siteIcon": "https://cpritchard007.github.io/zombie-cafe-recomp/assets/chef.png",
+      "siteIcon": "https://cpritchard007.github.io/zombie-cafe-recomp/assets/metadata/original-apple-touch-icon.png",
       "siteIcons": [
-        "https://cpritchard007.github.io/zombie-cafe-recomp/assets/chef.png",
+        "https://cpritchard007.github.io/zombie-cafe-recomp/assets/metadata/original-apple-touch-icon.png",
+        "https://cpritchard007.github.io/zombie-cafe-recomp/assets/metadata/original-icon-192.png",
+        "https://cpritchard007.github.io/zombie-cafe-recomp/assets/metadata/original-favicon-32.png",
         "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
       ],
       "siteColor": "#202d29",
-      "siteIconPadded": true
+      "siteIconPadded": false
     },
     {
       "id": 1418191034,
