@@ -1,9 +1,38 @@
 {
-  "generatedAt": "2026-10-14T02:33:28.689Z",
+  "generatedAt": "2026-10-14T02:37:19.367Z",
   "username": "cpritchard007",
   "topic": "project",
   "visibility": "public",
   "repos": [
+    {
+      "id": 1418191034,
+      "name": "puppet-wars-recomp",
+      "fullName": "CPritchard007/puppet-wars-recomp",
+      "description": "this is a fan made recompilation for a game I loved as a kid. If I could send you to the original I would but it has been unavailable for years. This is my best effort to allow you to once again enjoy this game",
+      "homepage": "",
+      "htmlUrl": "https://github.com/CPritchard007/puppet-wars-recomp",
+      "language": "JavaScript",
+      "stars": 1,
+      "createdAt": "2026-10-14T00:59:14Z",
+      "updatedAt": "2026-10-14T02:36:44Z",
+      "archived": false,
+      "hasPages": true,
+      "pagesUrl": "https://CPritchard007.github.io/puppet-wars-recomp/",
+      "pagesImage": "https://cpritchard007.github.io/puppet_wars_recomp/social/puppet-war-preview.png",
+      "topics": [
+        "favourites",
+        "in-development",
+        "project"
+      ],
+      "siteUrl": "https://CPritchard007.github.io/puppet-wars-recomp/",
+      "siteIcon": "https://cpritchard007.github.io/puppet-wars-recomp/favicon.png",
+      "siteIcons": [
+        "https://cpritchard007.github.io/puppet-wars-recomp/favicon.png",
+        "https://www.google.com/s2/favicons?domain=cpritchard007.github.io&sz=128"
+      ],
+      "siteColor": "#121b24",
+      "siteIconPadded": false
+    },
     {
       "id": 1390033272,
       "name": "maple-crossing-ai-travel-assistant",
